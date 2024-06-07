@@ -20,11 +20,18 @@ class ToDoApplication:
         pass
 
     def view_task(self):
-        pass
+        if not self.tasks:
+            print("Task list is empty!")
+        else:
+            print("To-Do list")
+
+            for i in range(len(self.tasks)):
+                print(f"{i+1}.", self.tasks[i])
+
 
     def start(self):
         while True:
-            print("To do Application\n"
+            print("\nTo do Application\n"
                   "1. Add Task\n"
                   "2. Remove Task\n"
                   "3. View Tasks\n"
