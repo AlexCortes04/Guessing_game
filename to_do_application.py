@@ -1,12 +1,20 @@
 class ToDoApplication:
     def __init__(self):
-        pass
+        self.tasks = list()
 
     def __del__(self):
         pass
 
     def add_task(self):
-        pass
+        while True:
+            usr_inpt = input("Enter the task: ")
+            if usr_inpt == "":
+                print("You have to type something.")
+                continue
+            break
+
+        self.tasks.append(usr_inpt)
+        print(f"'{usr_inpt}' has been added to the list.")
 
     def remove_task(self):
         pass
