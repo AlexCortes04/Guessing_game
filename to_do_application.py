@@ -69,5 +69,3 @@ class ToDoApplication:
                     self.view_task()
                 case 4:
                     exit()
-
-ToDoApplication().start()
