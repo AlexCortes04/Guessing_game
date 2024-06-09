@@ -17,7 +17,19 @@ class ToDoApplication:
         print(f"'{usr_inpt}' has been added to the list.")
 
     def remove_task(self):
-        pass
+        usr_inpt = str(input(f"Enter the task to remove {self.tasks}: "))
+        for i in self.tasks:
+            if usr_inpt in self.tasks:
+                self.tasks.remove(usr_inpt)
+                print(f"'{usr_inpt}' has been removed from the list.")
+            elif usr_inpt == "":
+                print("You have to type something.")
+                continue
+
+            else:
+                print(f"'{usr_inpt}' is not in the list")
+
+
 
     def view_task(self):
         if not self.tasks:
@@ -57,3 +69,5 @@ class ToDoApplication:
                     self.view_task()
                 case 4:
                     exit()
+
+ToDoApplication().start()
