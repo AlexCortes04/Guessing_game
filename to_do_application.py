@@ -2,30 +2,44 @@ from datetime import datetime
 
 class ToDoApplication:
     def __init__(self):
-        self.tasks = dict()
+        self.tasks = list()
 
     def __del__(self):
         pass
 
     def add_task(self):
         while True:
-            usr_inpt = input("Enter the task: ")
-            if usr_inpt == "":
+            task_name = input("Enter the task: ")
+            if task_name == "":
                 print("You have to type something.")
-                continue
+            elif task_name in [v['task_name'] for v in self.tasks]:
+                print("Task already exists")
+            else:
+                break
+
+        while True:
             priority = input("Enter the priority (high, medium, low): ")
-            if priority == "":
-                print("You have to type something.")
-            elif priority not in ("high", "medium", "low"):
+            if priority in ("high", "medium", "low"):
+                break
+            else:
                 print("Type one of the three priority options")
-                continue
+        
+        while True:
             deadline = input(f"Enter the deadline (YYYY-MM-DD): ")
-            if deadline == "":
-                print("You have to type something.")
-                continue
-            break
-        print(f"'{usr_inpt}' with {priority} priority and deadline {deadline} has been added to the list.")
-        self.tasks[usr_inpt] = [priority, deadline]
+            try:
+                deadline = datetime.strptime(deadline, "%Y-%m-%d")
+                if deadline < datetime.now():
+                    print("You typed a past date or today, is that okay? (Y/N)")
+                    usr_inpt = input()
+                    if usr_inpt.lower() != "y":
+                        continue
+                break
+            except:
+                print("Type the date in the correct format")
+
+        self.tasks.append({'task_name': task_name, 'priority': priority, 'deadline': deadline})
+        deadline = deadline.strftime("%Y-%m-%d")      
+        print(f"'{task_name}' with {priority} priority and deadline {deadline} has been added to the list.")
 
     def remove_task(self):
         if not self.tasks:
