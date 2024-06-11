@@ -4,34 +4,50 @@ style: |
     section.center {
         text-align: center;
     }
-
+    section.top {
+        justify-content: start;
+    }
 ---
 
-<!-- paginate: true
-_class: center
--->
+<!-- _class: center -->
 
 # Mini-Project1
-***~To-do-application~***
+**~To-do-application~**
 
-June 6th, 2024
+June 13th, 2024
 Alex, Yoji
 
 --- 
 
 # Agenda
 
-1. How did we use GitHub
-2. TDL-part1
-   1. add, remove, and view task
-   2. start code
-3. TDL-part2
-   1. Change current functions
-   2. Suggest Tasks
-4. Additional function
+
+1. Overreview
+2. How did we use GitHub
+3. Conding
+   1. Part1
+   2. Part2
+   3. Additional
+4. Demonstration
 5. Conclusion
+   1. Yoji
+   2. Alex
 
 ---
+
+# Overreview
+
+## Objective
+
+Create simple to-do-console-application.
+
+## Features
+
+User can add, view, remove tasks.
+And also, application suggest task depend on priority and deadline.
+
+---
+
 # How did we use GitHub
 
 ## We used "GitFlow"
@@ -44,234 +60,95 @@ Alex, Yoji
 - develop
 - slide
 - feature/*
-
----
-## なぜ本に頼るのか？
-
-***手段***
-
--  「本」
- -知らない時代、行ったことのない場所のことを知れる
- -要点がまとまっていてる
-
-***どんな方向に広げる？***
-
-- LTなので仕事関連にしたい
-- 普段関わらなそうな仕事人にふれる
-- 普段の仕事に還元する
-
----
-## 1. なぜ本に頼るのか？
-
-***どれくらい広げる？***
-- 発表時間であらすじ、ポイントを入れられるくらい
- -本3冊紹介
-
+![bg right w:600](image.png)
 
 ---
 
-<!--
-_class: center 
--->
+# Coding - part1
 
-# 本を頼って視野を広げて
+## We made validation for start, add, view, delete
 
-# 他の業界の仕事人を知って、
-# 自分と違う考えに触れてみよう
-
-<br>
-<br>
-
-# 知らないことを知るって楽しい！
+start task
+- User input is number which is not negative and float
+- User input is from 1 to 4.
+  
+add task
+- User input something (don't accept empty input)
 
 ---
 
-<!--
-_backgroundColor: MediumSeaGreen
-_color: white
--->
+<!-- _class: top -->
 
-## 目次
+view tasks
+- There is any task (there is no task, it will show warning)
 
-1. なぜ本に頼るのか？
-2. ***紹介①「切手デザイナーの仕事」***
-3. 紹介②「PIXAR」
-4. 紹介③「岩田さん」
-5. まとめ
+delete task
+- User input something (don't accept empty input)
+- There is any task (there is no task, it will show warning)
+- Tasks include user input (don't accept task which is not exists)
 
 ---
 
-## 1. 紹介①「切手デザイナーの仕事」
+# Coding - part2 (Create suggestion) 
 
-![bg left:50%](kitte_designer.PNG)
+## Edit add, view, remove task function
 
-あらすじ
-切手デザイナー8人に取材し、仕事と人柄をまとめた本
-- 仕事内容や進め方を紹介
-- デザイナー自身が大切にしていることや経歴も紹介
- 
----
+We had to store extra input, deadline and priority, so We edited functions.
 
-## 「切手デザイナーの仕事」の内容ピックアップ
+**Addtional validation**
+- For priority, we only accept "high", "medium", "low". if user input something else, it shows error.
+- For deadline, we only accept "YYYY-MM-DD" formated date. if user input something else, it shows error.
 
-- 切手独自の制約をアイデアで解決 p82
- -ひつじ年の年賀ハガキにデザインされた切手の誕生秘話
-
-
-> 郵便局で機械処理をするためのルールで、印面部分の上辺と下辺は必ず赤くする必要があって、その縛りが嫌だな、なんとかうまく絵柄に取り込みたいな、と思って。
-そこからあれこれ考えて、サフォークという顔の黒いヒツジさんが編み物をしているところへ繋がって行くのですけど
+**Warning**
+- For deadline, if user input past date, it shows warning.
 
 ---
 
-## 「切手デザイナーの仕事」のピックアップの内容から学べること
+<!-- _class: top -->
 
-1. 切手独自の制約をアイデアで解決
+## Suggestion logic
 
+- Show task which alredy passed deadline or close to deadline date.
+- If there are two or more tasks like that, compare priority. Application would show task which has higher priority.
+- if there are two or more task which has same deadline and same priority, application would show task which was added ealier
 
----
-
-
-<!--
-_backgroundColor: MediumSeaGreen
-_color: white
--->
-
-## 目次
-
-1. なぜ本に頼るのか？
-2. 紹介①「切手デザイナーの仕事」
-3. ***紹介②「PIXAR」***
-4. 紹介③「岩田さん」
-5. まとめ
-
-
+![w:900](suggestion.png)
 
 ---
 
-![bg left:50%](pixar_company.PNG)
-## 2. 紹介②「PIXAR」
-あらすじ
-スティーブジョブズが支えていた時から、ディズニー傘下に入るまで、会社を支えたCFOのお話
-- 創造性と現実の折り合い
+# Coding - additional
+
+## Data-Save function
+
+### Problem
+
+If you close or exit application, your tasks are gone.
+It means when you close and reopen application, there are no task which you have added.
+
+### Solution
+
+When you close or exit application, application save tasks in computer harddesk. When you open application, application load data from harddesk
+
+![bg right:18%](save_and_load_image.png)
 
 ---
 
-##  「PIXAR」の内容ピックアップ
-
-- 誇りを感じる瞬間をボスが創出 p258
-　-管理部門メンバーの名前をエンドロールに表示したい
-
-> スティーブのところで仕事をするなら縁の下の力持ちに徹するつもりでなければならない。～略～今回は会社全体が陰に入った感じなのが気になってしまった。
-社員の貢献に小さなスポットライトを当てるチャンスをみつけたとき、なりふり構わず突っ込んだのは、そういう思いがあったからだろう。
+# Demonstration
 
 ---
 
-> そのチャンスとは、『バグズ・ライフ』のエンドクレジットだ。～略～映画制作で何か役割を担った社員は、全員、ここに名前が載る。でも、ピクサーには、個別の映画に直接かかわっていないが、いてくれないと映画作れなくなってしまう社員もいる。
-
->～略～他の社員は、みな、スクリーンを流れていく一瞬だけとは言え、自分の名前にスポットライトが当たっている感じられる。
-～略～当人や家族にとって輝く瞬間であり、誇りを感じる瞬間である。私は、自分の部分も同じ思いをしていいはずだと思った。
+## You can see our code here!
+https://github.com/AlexCortes04/Mini_project1
 
 ---
 
-## 「PIXAR」のピックアップから学べること
+# Conclusion
 
-1. 誇りを感じる瞬間をボスが創出
+**What was the challenges and impressions**
 
+## Yoji
 
----
-
-<!--
-_backgroundColor: MediumSeaGreen
-_color: white
--->
-
-## 目次
-
-1. なぜ本に頼るのか？
-2. 紹介①「切手デザイナーの仕事」
-3. 紹介②「PIXAR」
-4. ***紹介③「岩田さん」***
-5. まとめ
-
----
-
-## 4. 紹介③「岩田さん」
-
-![bg left:50%](iwatasan.PNG)
-
-あらすじ
-ほぼ日刊イトイ新聞に掲載された岩田さんのことばを再構成した本
+I used to use "GitLab" which is similier to "GitHub", so I was easy to get used to. But it was glad to learn about GitHub. I used "Marp" to make Slides. It was first time to use, but it was very usefull and easy to use.
 
 
-- 岩田さんとは任天堂の元社長岩田聡さん
-
----
-
-##  「岩田さん」の内容ピックアップ
-
-- 1対1での面談の気づき p27～28
-　-任天堂の社長になるまでの経験
-
-> ～略～一度倒産してしまうと、まとまった時間を取ることができて、以前にできなかったことができるんです。
-その「できなかったこと」が、わたしにとっては、みんなとの対話、社員ひとりひとりとの面談でした。　
-
----
-
-> ～略～最初に全員と話をしたとき、「面談してはじめてわかったこと」がものすごく多かったんです。それまでふつうにコミュニケーションできていたと思っていた人でも、一対一で面談するとはじめて語ってくれることがある。
-変な言い方になりますが、「人は逆さにして振らないと、こんなにもものを言えないのか」と改めて思いました。
-
----
-
-## 「岩田さん」のピックアップから学べること
-
-1. 会話する機会をつくる大切さ
-
-
----
-
-<!--
-_backgroundColor: MediumSeaGreen
-_color: white
--->
-
-## 目次
-
-1. なぜ本に頼るのか？
-2. 紹介①「切手デザイナーの仕事」
-3. 紹介②「PIXAR」
-4. 紹介③「岩田さん」
-5. ***まとめ***
-
----
-
-## 5. まとめ 
-
-| 書籍名 |学べること|
-|:---------:|:------------------------:|
-| 切手デザイナーの仕事| 切手独自の制約をアイデアで解決 |
-| PIXAR| 誇りを感じる瞬間をボスが創出|
-| 岩田さん| 会話する機会をつくる大切さ|
-
----
-
-## 紹介した本　
-
-- 間部 香代（2022）『切手デザイナーの仕事 〜日本郵便　切手・葉書室より〜』 グラフィック社．
-- ローレンス・レビー(著), 井口耕二(翻訳)（2019）『PIXAR 〈ピクサー〉 世界一のアニメーション企業の今まで語られなかったお金の話』 文響社．
-- ほぼ日刊イトイ新聞（2019）『岩田さん 岩田聡はこんなことを話していた。』 株式会社ほぼ日．
-
----
-
-## 画像の出典
--Amazonのwebサイトから画像を引用（2023年1月29日アクセス）
-
-https://www.amazon.co.jp/%E5%88%87%E6%89%8B%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC%E3%81%AE%E4%BB%95%E4%BA%8B-%E3%80%9C%E6%97%A5%E6%9C%AC%E9%83%B5%E4%BE%BF-%E5%88%87%E6%89%8B%E3%83%BB%E8%91%89%E6%9B%B8%E5%AE%A4%E3%82%88%E3%82%8A%E3%80%9C-%E9%96%93%E9%83%A8-%E9%A6%99%E4%BB%A3/dp/4766137167
-
-
-https://www.amazon.co.jp/%E5%B2%A9%E7%94%B0%E3%81%95%E3%82%93-%E5%B2%A9%E7%94%B0%E8%81%A1%E3%81%AF%E3%81%93%E3%82%93%E3%81%AA%E3%81%93%E3%81%A8%E3%82%92%E8%A9%B1%E3%81%97%E3%81%A6%E3%81%84%E3%81%9F%E3%80%82-%E3%81%BB%E3%81%BC%E6%97%A5%E5%88%8A%E3%82%A4%E3%83%88%E3%82%A4%E6%96%B0%E8%81%9E/dp/4865014225
-
-https://www.amazon.co.jp/PIXAR-%E3%83%94%E3%82%AF%E3%82%B5%E3%83%BC-%E4%B8%96%E7%95%8C%E4%B8%80%E3%81%AE%E3%82%A2%E3%83%8B%E3%83%A1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E4%BC%81%E6%A5%AD%E3%81%AE%E4%BB%8A%E3%81%BE%E3%81%A7%E8%AA%9E%E3%82%89%E3%82%8C%E3%81%AA%E3%81%8B%E3%81%A3%E3%81%9F%E3%81%8A%E9%87%91%E3%81%AE%E8%A9%B1-%E3%83%AD%E3%83%BC%E3%83%AC%E3%83%B3%E3%82%B9%E3%83%BB%E3%83%AC%E3%83%93%E3%83%BC/dp/4866511133
-
----
-
-
+## Alex
