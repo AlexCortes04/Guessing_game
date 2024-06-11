@@ -31,8 +31,9 @@ class ToDoApplication:
                 if deadline < datetime.now():
                     print("You typed a past date or today, is that okay? (Y/N)")
                     usr_inpt = input()
-                    if usr_inpt.lower() == "y":
-                        break
+                    if usr_inpt.lower() != "y":
+                        continue
+                break
             except:
                 print("Type the date in the correct format")
 
