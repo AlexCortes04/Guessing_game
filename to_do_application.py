@@ -99,7 +99,3 @@ class ToDoApplication:
                 case 4:
                     print("Goodbye!")
                     exit()
-
-ToDoApplication().start()
-
-
