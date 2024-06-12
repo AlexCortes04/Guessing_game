@@ -1,9 +1,21 @@
+import os, json
+
+
 class ToDoApplication:
     def __init__(self):
-        self.tasks = list()
+        if os.path.isfile("tasks.json"):
+            with open("tasks.json", "r") as file:
+                self.tasks = json.load(file)
+        else:
+            self.tasks = list()
 
     def __del__(self):
-        pass
+        if self.tasks:
+            with open("tasks.json", "w") as file:
+                json.dump(self.tasks, file)
+        else:
+            if os.path.isfile("tasks.json"):
+                os.remove("tasks.json")
 
     def add_task(self):
         while True:
@@ -69,3 +81,12 @@ class ToDoApplication:
                     self.view_task()
                 case 4:
                     exit()
+
+
+def main():
+    app = ToDoApplication()
+    app.start()
+
+
+if __name__ == "__main__":
+    main()
