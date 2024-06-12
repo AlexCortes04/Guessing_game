@@ -12,7 +12,7 @@ style: |
 <!-- _class: center -->
 
 # Mini-Project1
-**~To-do-application~**
+**To-do-application**
 
 June 13th, 2024
 Alex, Yoji
@@ -93,14 +93,14 @@ delete task
 
 ## Edit add, view, remove task function
 
-We had to store extra input, deadline and priority, so We edited functions.
+We had to store extra input, deadline and priority, so we edited functions.
 
 **Addtional validation**
 - For priority, we only accept "high", "medium", "low". if user input something else, it shows error.
 - For deadline, we only accept "YYYY-MM-DD" formated date. if user input something else, it shows error.
 
 **Warning**
-- For deadline, if user input past date, it shows warning.
+- For deadline, if user input past date or today, it shows warning.
 
 ---
 
