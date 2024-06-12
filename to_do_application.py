@@ -1,4 +1,4 @@
-from datetime import datetime
+import datetime
 
 class ToDoApplication:
     def __init__(self):
@@ -9,7 +9,7 @@ class ToDoApplication:
 
     def add_task(self):
         while True:
-            task_name = input("Enter the task: ")
+            task_name = input("Enter the task: ").strip()
             if task_name == "":
                 print("You have to type something.")
             elif task_name in [v['task_name'] for v in self.tasks]:
@@ -27,10 +27,9 @@ class ToDoApplication:
         while True:
             deadline = input(f"Enter the deadline (YYYY-MM-DD): ")
             try:
-                deadline = datetime.strptime(deadline, "%Y-%m-%d")
-                if deadline < datetime.now():
-                    print("You typed a past date or today, is that okay? (Y/N)")
-                    usr_inpt = input()
+                deadline = datetime.datetime.strptime(deadline, "%Y-%m-%d")
+                if deadline < datetime.datetime.now():
+                    usr_inpt = input("You typed a past date or today, is that okay? (Y/N): ")
                     if usr_inpt.lower() != "y":
                         continue
                 break
@@ -38,7 +37,7 @@ class ToDoApplication:
                 print("Type the date in the correct format")
 
         self.tasks.append({'task_name': task_name, 'priority': priority, 'deadline': deadline})
-        deadline = deadline.strftime("%Y-%m-%d")      
+        deadline = deadline.strftime("%Y-%m-%d")
         print(f"'{task_name}' with {priority} priority and deadline {deadline} has been added to the list.")
 
     def remove_task(self):
@@ -46,15 +45,18 @@ class ToDoApplication:
             print("Task list is empty!")
             return
 
-        usr_inpt = input("Enter the task to remove: ")
-        if usr_inpt in self.tasks:
-            self.tasks.remove(usr_inpt) #User had to type the task name with priotity and date
+        while True:
+            usr_inpt = input(f"Enter the task to remove: ")
+            if usr_inpt == "":
+                print("You have to type something.")
+            break
+
+        task_list = [v['task_name'] for v in self.tasks]
+        if usr_inpt in task_list:
+            del self.tasks[task_list.index(usr_inpt)]
             print(f"'{usr_inpt}' has been removed from the list. Advanced")
-        elif usr_inpt == "":
-            print("You have to type something.")
         else:
             print(f"'{usr_inpt}' is not in the list")
-
 
     def view_task(self):
         if not self.tasks:
@@ -62,13 +64,15 @@ class ToDoApplication:
         else:
             print("To-Do list")
 
-            for k, v in self.tasks:
-                print(f"{k+1}.", self.tasks[k])
+            for i, t in enumerate(self.tasks):
+                values = list(t.values())
+                values[2] = values[2].strftime("%Y-%m-%d")
+                print(f"{i+1}.", " - ".join(values))
 
 
     def start(self):
         while True:
-            print("\n Advanced To do Application\n"
+            print("\nAdvanced To do Application\n"
                   "1. Add Task\n"
                   "2. Remove Task\n"
                   "3. View Tasks\n"
@@ -97,3 +101,5 @@ class ToDoApplication:
                     exit()
 
 ToDoApplication().start()
+
+
