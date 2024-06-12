@@ -150,5 +150,6 @@ https://github.com/AlexCortes04/Mini_project1
 
 I used to use "GitLab" which is similier to "GitHub", so I was easy to get used to. But it was glad to learn about GitHub. I used "Marp" to make Slides. It was first time to use, but it was very usefull and easy to use.
 
-
 ## Alex
+
+Several times, i felt like i was very close to have the problem solved wich wasn't true, but having that false trust on my code, made me keep the wrong path and by consequense, i couldn't understand the right logic quickly. 
