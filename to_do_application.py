@@ -79,6 +79,42 @@ class ToDoApplication:
                 values[2] = values[2].strftime("%Y-%m-%d")
                 print(f"{i+1}.", " - ".join(values))
 
+    def suggest_task(self):
+        if not self.tasks:
+            print("Task list is empty!")
+            return
+        
+        current_time = datetime.datetime.now()
+        if current_time.hour < 12:
+            print("Good morning! ")
+        elif current_time.hour < 18:
+            print("Good afternoon! ")
+        else:
+            print("Good evening! ")
+        print("Here are some tasks you might want to work on: ")
+
+        min_deadline = min([v["deadline"] for v in self.tasks])
+        suggest_tasks = [v for v in self.tasks if v["deadline"] == min_deadline]
+        suggest_tasks = [{
+            "task_name": v["task_name"], "priority": v["priority"],
+            "deadline": v["deadline"].strftime("%Y-%m-%d")
+            } for v in suggest_tasks]
+
+        if len(suggest_tasks) == 1:
+            print(" - ".join(suggest_tasks[0].values()))
+            return
+        
+        tmp = [v for v in suggest_tasks if v["priority"] == "high"]
+        if tmp:
+            [print(" - ".join(v.values())) for v in tmp]
+            return
+        
+        tmp = [v for v in suggest_tasks if v["priority"] == "medium"]
+        if tmp:
+            [print(" - ".join(v.values())) for v in tmp]
+            return
+        
+        [print(" - ".join(v.values())) for v in suggest_tasks]
 
     def start(self):
         while True:
@@ -86,7 +122,8 @@ class ToDoApplication:
                   "1. Add Task\n"
                   "2. Remove Task\n"
                   "3. View Tasks\n"
-                  "4. Exit")
+                  "4. Suggest Tasks\n"
+                  "5. Exit")
             while True:
                 usr_inpt = input("Enter your choice: ")
                 if not usr_inpt.isdecimal():
@@ -99,6 +136,7 @@ class ToDoApplication:
                     continue
                 break
 
+            print()
             match usr_inpt:
                 case 1:
                     self.add_task()
@@ -107,7 +145,9 @@ class ToDoApplication:
                 case 3:
                     self.view_task()
                 case 4:
-                    print("Goodbye!")
+                    self.suggest_task()
+                case 5:
+                    print("Exiting the application. Goodbye!")
                     exit()
 
 
