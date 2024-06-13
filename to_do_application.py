@@ -6,11 +6,19 @@ class ToDoApplication:
         if os.path.isfile("tasks.json"):
             with open("tasks.json", "r") as file:
                 self.tasks = json.load(file)
+                self.tasks = [
+                    {'task_name': v["task_name"], 'priority': v["priority"],
+                    "deadline": datetime.datetime.strptime(v["deadline"], "%Y-%m-%d")} for v in self.tasks
+                ]
         else:
             self.tasks = list()
 
     def __del__(self):
         if self.tasks:
+            self.tasks = [
+                {'task_name': v["task_name"], 'priority': v["priority"],
+                  "deadline": v["deadline"].strftime("%Y-%m-%d")} for v in self.tasks
+            ]
             with open("tasks.json", "w") as file:
                 json.dump(self.tasks, file)
         else:
@@ -131,8 +139,8 @@ class ToDoApplication:
                     continue
 
                 usr_inpt = int(usr_inpt)
-                if not 1 <= usr_inpt <= 4:
-                    print("Enter a number from 1 to 4")
+                if not 1 <= usr_inpt <= 5:
+                    print("Enter a number from 1 to 5")
                     continue
                 break
 
